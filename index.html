@@ -258,7 +258,7 @@ h1, h2, h3 { font-family: 'Cairo', 'Tajawal', sans-serif; font-weight: 800; }
 .q-pic-loading .spinner { width: 32px; height: 32px; border: 3px solid rgba(212,175,55,0.25); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
 .q-zoom-hint { width: 220px; height: 220px; margin: 0 auto; border-radius: 14px; overflow: hidden; background: rgba(255,255,255,0.04); border: 2px solid rgba(6,182,212,0.4); position: relative; }
 .q-zoom-hint img { position: absolute; display: block; max-width: none; }
-.q-zoom-hint.revealed img { position: static; width: 100%; height: 100%; object-fit: cover; transform: none !important; }
+.q-zoom-hint.revealed img { position: static !important; width: 100% !important; height: 100% !important; object-fit: cover; max-width: none; }
 .q-zoom-badge { position: absolute; bottom: 6px; right: 6px; background: rgba(6,182,212,0.85); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; font-family: 'Cairo', sans-serif; }
 .q-pic-genfail { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 12px; color: var(--ink-dim); text-align: center; line-height: 1.6; padding: 10px; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -1835,7 +1835,7 @@ const QUESTIONS_DB = {
   zoom: [
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'تفاحة', diff: 'med', zoomKeyword: 'red apple fruit' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'موزة', diff: 'med', zoomKeyword: 'banana fruit yellow' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'ساعة يد', diff: 'med', zoomKeyword: 'wrist watch' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'ساعة يد', diff: 'med', zoomKeyword: 'luxury wrist watch' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'مفتاح', diff: 'med', zoomKeyword: 'metal key' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'نظارة', diff: 'med', zoomKeyword: 'eyeglasses' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'مقص', diff: 'med', zoomKeyword: 'scissors' },
@@ -1872,7 +1872,7 @@ const QUESTIONS_DB = {
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'عش طائر', diff: 'hard', zoomKeyword: 'bird nest' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'خلية نحل', diff: 'hard', zoomKeyword: 'honeycomb bees' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'جناح فراشة', diff: 'hard', zoomKeyword: 'butterfly wing macro' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'قرص شمس غروب', diff: 'hard', zoomKeyword: 'sunset sun' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'قرص شمس غروب', diff: 'hard', zoomKeyword: 'orange sunset sky sun' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'ريشة طاووس', diff: 'hard', zoomKeyword: 'peacock feather' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'قشرة شجرة', diff: 'hard', zoomKeyword: 'tree bark texture' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'نسيج عنكبوت', diff: 'hard', zoomKeyword: 'spider web' },
@@ -1880,11 +1880,11 @@ const QUESTIONS_DB = {
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'مرجان بحري', diff: 'hard', zoomKeyword: 'coral reef' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'فقاعات صابون', diff: 'hard', zoomKeyword: 'soap bubbles' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'حبوب قهوة', diff: 'hard', zoomKeyword: 'coffee beans' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'توابل ملونة', diff: 'hard', zoomKeyword: 'colorful spices' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'خيوط صوف', diff: 'hard', zoomKeyword: 'wool yarn' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'أزرار قميص', diff: 'hard', zoomKeyword: 'shirt buttons' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'سلسلة معدنية', diff: 'hard', zoomKeyword: 'metal chain' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'مفصلة باب', diff: 'hard', zoomKeyword: 'door hinge' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'توابل ملونة', diff: 'hard', zoomKeyword: 'spice market bowls' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'خيوط صوف', diff: 'hard', zoomKeyword: 'colorful wool yarn balls' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'أزرار قميص', diff: 'hard', zoomKeyword: 'white shirt buttons closeup' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'سلسلة معدنية', diff: 'hard', zoomKeyword: 'silver metal chain links' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'مفصلة باب', diff: 'hard', zoomKeyword: 'brass door hinge' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'عجلة سيارة', diff: 'hard', zoomKeyword: 'car tire' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'لوحة مفاتيح', diff: 'hard', zoomKeyword: 'keyboard keys' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'عدسة كاميرا', diff: 'hard', zoomKeyword: 'camera lens' },
@@ -1895,10 +1895,10 @@ const QUESTIONS_DB = {
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'أوراق خريف', diff: 'hard', zoomKeyword: 'autumn leaves' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'جذع نخلة', diff: 'hard', zoomKeyword: 'palm tree trunk' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'قشر برتقال', diff: 'hard', zoomKeyword: 'orange peel texture' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'خبز محمص', diff: 'hard', zoomKeyword: 'toast bread texture' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'جبنة', diff: 'hard', zoomKeyword: 'cheese texture' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'شوكولاتة', diff: 'hard', zoomKeyword: 'chocolate bar texture' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'عسل', diff: 'hard', zoomKeyword: 'honey dripping' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'خبز محمص', diff: 'hard', zoomKeyword: 'toasted bread slice' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'جبنة', diff: 'hard', zoomKeyword: 'swiss cheese block' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'شوكولاتة', diff: 'hard', zoomKeyword: 'chocolate bar pieces' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'عسل', diff: 'hard', zoomKeyword: 'honey jar dripping spoon' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'جلد فيل', diff: 'vhard', zoomKeyword: 'elephant skin texture' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'فرو أسد', diff: 'vhard', zoomKeyword: 'lion fur mane' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'ريش نسر', diff: 'vhard', zoomKeyword: 'eagle feathers' },
@@ -1906,8 +1906,8 @@ const QUESTIONS_DB = {
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'جناح خنفساء', diff: 'vhard', zoomKeyword: 'beetle wing shell' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'عين قطة', diff: 'vhard', zoomKeyword: 'cat eye macro' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'بصمة إصبع', diff: 'vhard', zoomKeyword: 'fingerprint macro' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'نسيج قماش', diff: 'vhard', zoomKeyword: 'fabric texture close up' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'رغوة كابتشينو', diff: 'vhard', zoomKeyword: 'cappuccino foam art' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'نسيج قماش', diff: 'vhard', zoomKeyword: 'colorful fabric textile' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'رغوة كابتشينو', diff: 'vhard', zoomKeyword: 'cappuccino latte art heart' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'حبوب رمان', diff: 'vhard', zoomKeyword: 'pomegranate seeds' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'قشرة بيض مكسورة', diff: 'vhard', zoomKeyword: 'cracked eggshell macro' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'سطح القمر', diff: 'vhard', zoomKeyword: 'moon surface craters' },
@@ -1924,12 +1924,12 @@ const QUESTIONS_DB = {
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'جناح يعسوب', diff: 'vhard', zoomKeyword: 'dragonfly wing macro' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'حراشف ثعبان', diff: 'vhard', zoomKeyword: 'snake scales texture' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'سطح الفراولة', diff: 'vhard', zoomKeyword: 'strawberry seeds macro' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'نسيج الإسفنج البحري', diff: 'vhard', zoomKeyword: 'sea sponge texture' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'طحالب بحرية', diff: 'vhard', zoomKeyword: 'seaweed texture' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'نسيج الإسفنج البحري', diff: 'vhard', zoomKeyword: 'natural sea sponge' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'طحالب بحرية', diff: 'vhard', zoomKeyword: 'green seaweed kelp' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'قشرة جوز الهند', diff: 'vhard', zoomKeyword: 'coconut shell texture' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'عروق ورقة نبات', diff: 'vhard', zoomKeyword: 'leaf veins macro' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'بتلات ورد متساقطة', diff: 'vhard', zoomKeyword: 'rose petals macro' },
-    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'رمال ملونة', diff: 'vhard', zoomKeyword: 'colored sand texture' },
+    { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'رمال ملونة', diff: 'vhard', zoomKeyword: 'rainbow sand art bottle' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'سطح القرنبيط', diff: 'vhard', zoomKeyword: 'cauliflower texture macro' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'قشرة الأناناس', diff: 'vhard', zoomKeyword: 'pineapple skin texture' },
     { q: 'شوف الصورة المقرّبة، وش هذا الشيء؟', a: 'نقشة زرافة', diff: 'vhard', zoomKeyword: 'giraffe pattern skin' },
@@ -2821,20 +2821,35 @@ function openQuestion(catId, tileIdx) {
       if (url) {
         const img = new Image();
         img.alt = '';
-        // Zoom in hard (400-550%) and offset toward a random-ish but deterministic crop region
-        // so the visible slice is a close-up detail, not the whole recognizable object.
-        let seed = 0;
-        for (let i = 0; i < questionId.length; i++) seed = (seed * 31 + questionId.charCodeAt(i)) >>> 0;
-        const scale = 4 + (seed % 150) / 100; // 4.0x - 5.5x
-        const offsetX = 20 + (seed % 60); // 20% - 80%
-        const offsetY = 20 + ((seed >> 3) % 60);
         img.onload = () => {
           zoomDiv.innerHTML = '';
-          img.style.width = (scale * 100) + '%';
-          img.style.height = (scale * 100) + '%';
-          img.style.left = '-' + (offsetX * scale / 2) + '%';
-          img.style.top = '-' + (offsetY * scale / 2) + '%';
-          img.style.objectFit = 'cover';
+          // Reliable pixel-based crop: first make the image fill/cover the 220x220 box exactly
+          // (like object-fit:cover would, computed manually), THEN apply extra zoom on top of
+          // that base-covered size — this guarantees a genuine close-up crop regardless of the
+          // source photo's aspect ratio (portrait vs landscape), which was the root cause of
+          // some images appearing "full" instead of zoomed.
+          const boxSize = 220;
+          const natW = img.naturalWidth;
+          const natH = img.naturalHeight;
+          const coverScale = Math.max(boxSize / natW, boxSize / natH);
+          let seed = 0;
+          for (let i = 0; i < questionId.length; i++) seed = (seed * 31 + questionId.charCodeAt(i)) >>> 0;
+          const extraZoom = 3.5 + (seed % 150) / 100; // additional 3.5x - 5.0x on top of the cover fit
+          const totalScale = coverScale * extraZoom;
+          const renderedW = natW * totalScale;
+          const renderedH = natH * totalScale;
+          // Pick a random-ish but deterministic crop offset within the safe range so the visible
+          // 220x220 window never goes past the image edges (avoids blank/transparent gaps).
+          const maxOffsetX = Math.max(0, renderedW - boxSize);
+          const maxOffsetY = Math.max(0, renderedH - boxSize);
+          const offsetX = (seed % 1000) / 1000 * maxOffsetX;
+          const offsetY = ((seed >> 4) % 1000) / 1000 * maxOffsetY;
+          img.style.position = 'absolute';
+          img.style.width = renderedW + 'px';
+          img.style.height = renderedH + 'px';
+          img.style.left = '-' + offsetX + 'px';
+          img.style.top = '-' + offsetY + 'px';
+          img.style.maxWidth = 'none';
           zoomDiv.appendChild(img);
           zoomDiv.dataset.fullUrl = url;
           const badge = document.createElement('div');
@@ -2973,6 +2988,8 @@ function revealAnswer() {
       img.style.height = '';
       img.style.left = '';
       img.style.top = '';
+      img.style.position = '';
+      img.style.maxWidth = '';
     }
     const badge = zoomContainer.querySelector('.q-zoom-badge');
     if (badge) badge.textContent = '✅ الصورة كاملة';
