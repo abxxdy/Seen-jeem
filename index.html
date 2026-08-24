@@ -407,7 +407,7 @@ h1, h2, h3 { font-family: 'Cairo', 'Tajawal', sans-serif; font-weight: 800; }
 /* Category colors */
 .cat-islam { --c: #e11d48; } .cat-geo { --c: #0ea5e9; } .cat-science { --c: #10b981; }
 .cat-lit { --c: #8b5cf6; } .cat-history { --c: #f59e0b; } .cat-sport { --c: #ec4899; }
-.cat-art { --c: #06b6d4; } .cat-riddle { --c: #84cc16; } .cat-tech { --c: #6366f1; }
+.cat-riddle { --c: #84cc16; } .cat-tech { --c: #6366f1; }
 .cat-health { --c: #ef4444; } .cat-religion { --c: #14b8a6; } .cat-general { --c: #d946ef; }
 .cat-movies { --c: #f97316; } .cat-food { --c: #22c55e; } .cat-space { --c: #4f46e5; }
 .cat-animals { --c: #a855f7; } .cat-guesspic { --c: #f43f5e; } .cat-figures { --c: #8b5cf6; } .cat-letters { --c: #eab308; } .cat-zoom { --c: #06b6d4; }
@@ -417,7 +417,6 @@ h1, h2, h3 { font-family: 'Cairo', 'Tajawal', sans-serif; font-weight: 800; }
 .board-cat-header.cat-lit { background: rgba(139,92,246,0.18); border-color: var(--c); }
 .board-cat-header.cat-history { background: rgba(245,158,11,0.18); border-color: var(--c); }
 .board-cat-header.cat-sport { background: rgba(236,72,153,0.18); border-color: var(--c); }
-.board-cat-header.cat-art { background: rgba(6,182,212,0.18); border-color: var(--c); }
 .board-cat-header.cat-riddle { background: rgba(132,204,22,0.18); border-color: var(--c); }
 .board-cat-header.cat-tech { background: rgba(99,102,241,0.18); border-color: var(--c); }
 .board-cat-header.cat-health { background: rgba(239,68,68,0.18); border-color: var(--c); }
@@ -604,7 +603,6 @@ const ALL_CATEGORIES = [
   { id:'islam', name:'قصص الأنبياء', icon:'📜', cls:'cat-islam', imgPrompt:'ancient scroll with Islamic geometric architecture, warm golden light, realistic photo', bgKeyword:'ancient manuscript scroll', desc:'تحتوي على أسئلة عن قصص الأنبياء عليهم السلام، معجزاتهم، أقوامهم، وألقابهم في القرآن الكريم.' },
   { id:'geo', name:'جغرافيا', icon:'🌍', cls:'cat-geo', imgPrompt:'world globe map with mountains and oceans, realistic photo, aerial landscape', bgKeyword:'world map globe travel', desc:'تحتوي على أسئلة عن الدول، العواصم، القارات، والمعالم الجغرافية حول العالم.' },
   { id:'figures', name:'أعلام', icon:'🚩', cls:'cat-figures', imgPrompt:'colorful national flags waving, realistic photo', bgKeyword:'national flags world', desc:'تشوف علم دولة وتخمّن اسمها الصحيح.' },
-  { id:'art', name:'فنون', icon:'🎨', cls:'cat-art', imgPrompt:'colorful paint palette and brushes on canvas, realistic photo', bgKeyword:'paint palette art canvas', desc:'تحتوي على أسئلة عن الرسم، النحت، الفنانين المشهورين، والحركات الفنية.' },
   { id:'riddle', name:'ألغاز', icon:'🧩', cls:'cat-riddle', imgPrompt:'colorful jigsaw puzzle pieces close up, realistic photo', bgKeyword:'jigsaw puzzle pieces', desc:'تحتوي على ألغاز وأحاجي ذكاء تحتاج تفكير وتحليل للوصول للإجابة الصحيحة.' },
   { id:'tech', name:'تقنية', icon:'💻', cls:'cat-tech', imgPrompt:'modern laptop and circuit board with blue glowing lights, realistic photo', bgKeyword:'laptop technology circuit', desc:'تحتوي على أسئلة عن الحاسوب، الإنترنت، الشركات التقنية، والاختراعات الرقمية.' },
   { id:'general', name:'معلومات عامة', icon:'💡', cls:'cat-general', imgPrompt:'glowing lightbulb idea concept, realistic photo, dark background', bgKeyword:'lightbulb idea concept', desc:'تحتوي على أسئلة متنوعة تشمل كل شيء تقريباً — من العلوم للتاريخ للحياة اليومية.' },
@@ -1030,108 +1028,6 @@ const QUESTIONS_DB = {
     { q: 'ما هي عاصمة العرب الأنباط؟', a: 'البتراء في الأردن', diff: 'vhard', imgKeyword: 'city skyline aerial', imgUrl: 'https://images.pexels.com/photos/97906/pexels-photo-97906.jpeg?auto=compress&cs=tinysrgb&w=800' },
     { q: 'كم عدد الدول التي يمر منها نهر النيل؟', a: '11 دولة', diff: 'vhard', imgKeyword: 'river landscape nature', imgUrl: 'https://images.pexels.com/photos/1559117/pexels-photo-1559117.jpeg?auto=compress&cs=tinysrgb&w=800' },
     { q: 'ما هي الدول التي تقع فيها جبال الأنديز؟', a: 'بوليفيا وتشيلي والبيرو والأرجنتين', diff: 'vhard', imgKeyword: 'mountain peak landscape', imgUrl: 'https://images.pexels.com/photos/32245095/pexels-photo-32245095.jpeg?auto=compress&cs=tinysrgb&w=800' },
-  ],
-  art: [
-    { q: 'اذكر الفروع الثلاثة الكلاسيكية للفن؟', a: 'الرسم والنحت والعمارة', diff: 'med', imgKeyword: 'art creativity palette' },
-    { q: 'من الفنان العالمي الذي رسم لوحة الموناليزا؟', a: 'ليوناردو دافنشي', diff: 'med', imgKeyword: 'renaissance painting museum' },
-    { q: 'من الفنان الذي رسم لوحة ليلة النجوم Starry Night؟', a: 'فنسنت فان كوخ', diff: 'med', imgKeyword: 'oil painting art gallery' },
-    { q: 'من الفنان الذي رسم لوحة الصرخة The Scream؟', a: 'إدفارت مونك', diff: 'med', imgKeyword: 'oil painting art gallery' },
-    { q: 'من هو مؤلف مسرحية عطيل؟', a: 'ويليام شكسبير', diff: 'med', imgKeyword: 'theater stage curtain' },
-    { q: 'ما هو المتحف الأكبر في باريس؟', a: 'متحف اللوفر', diff: 'med', imgKeyword: 'museum interior art' },
-    { q: 'من صمم تمثال الحرية؟', a: 'فريدريك بارتولدي (والهيكل الإنشائي غوستاف إيفل)', diff: 'med', imgKeyword: 'marble sculpture statue' },
-    { q: 'من هو مؤسس الحركة التكعيبية في الفن؟', a: 'بابلو بيكاسو', diff: 'med', imgKeyword: 'classic art culture' },
-    { q: 'من هو مؤلف رواية البؤساء؟', a: 'فيكتور هوغو', diff: 'med', imgKeyword: 'classic art culture' },
-    { q: 'أين يقع برج بيزا المائل؟', a: 'مدينة بيزا الإيطالية', diff: 'med', imgKeyword: 'italy historic tower' },
-    { q: 'من هو الملحن الألماني صاحب تسع سيمفونيات الذي فقد سمعه؟', a: 'لودفيغ فان بيتهوفن', diff: 'med', imgKeyword: 'classical music instrument' },
-    { q: 'أين يقع معلم تاج محل؟', a: 'الهند', diff: 'med', imgKeyword: 'white marble monument india' },
-    { q: 'من هو رسام لوحة العشاء الأخير؟', a: 'ليوناردو دافنشي', diff: 'med', imgKeyword: 'oil painting art gallery' },
-    { q: 'من هو رسام لوحة خلق آدم على سقف كنيسة سيستين؟', a: 'مايكل آنجلو', diff: 'med', imgKeyword: 'oil painting art gallery' },
-    { q: 'أين تقع كنيسة سيستين التي رُسمت على سقفها لوحة خلق آدم؟', a: 'الفاتيكان', diff: 'med', imgKeyword: 'oil painting art gallery' },
-    { q: 'من صمم برج إيفل في باريس؟', a: 'غوستاف إيفل', diff: 'med', imgKeyword: 'paris landmark tower' },
-    { q: 'من هو النحات الإيطالي الذي نحت تمثال داوود الشهير؟', a: 'مايكل آنجلو', diff: 'med', imgKeyword: 'marble sculpture statue' },
-    { q: 'ما هي المادة التي صُنع منها تاج محل في الهند؟', a: 'الرخام الأبيض', diff: 'med', imgKeyword: 'white marble monument india' },
-    { q: 'ما هي أنواع الخط العربي الرئيسية؟', a: 'الكوفي والنسخي والثلث والديواني والفارسي والرقعة', diff: 'med', imgKeyword: 'classic art culture' },
-    { q: 'من هو المهندس المعماري الذي صمم دار أوبرا سيدني؟', a: 'يورن أوتسون', diff: 'med', imgKeyword: 'modern architecture landmark' },
-    { q: 'من هو المهندس المعماري الإسباني الشهير بأسلوبه الفريد في برشلونة؟', a: 'أنطونيو غاودي', diff: 'med', imgKeyword: 'classic art culture' },
-    { q: 'من هو المهندس الذي صمم الهيكل الإنشائي لتمثال الحرية؟', a: 'غوستاف إيفل', diff: 'med', imgKeyword: 'marble sculpture statue' },
-    { q: 'من هو الرسام الفرنسي الذي استمدت منه المدرسة الانطباعية اسمها من لوحته "انطباع شروق الشمس"؟', a: 'كلود مونيه', diff: 'med', imgKeyword: 'oil painting art gallery' },
-    { q: 'من هو الرسام الإسباني السريالي صاحب لوحة "إصرار الذاكرة"؟', a: 'سلفادور دالي', diff: 'med', imgKeyword: 'oil painting art gallery' },
-    { q: 'في أي بلد يقع معلم البتراء من عجائب الدنيا السبع الجديدة؟', a: 'الأردن', diff: 'med', imgKeyword: 'ancient wonder monument' },
-    { q: 'في أي دولة يقع تمثال المسيح الفادي من عجائب الدنيا السبع الجديدة؟', a: 'البرازيل', diff: 'med', imgKeyword: 'marble sculpture statue' },
-    { q: 'ما هو المعلم الصيني الشهير المدرج ضمن عجائب الدنيا السبع الجديدة؟', a: 'سور الصين العظيم', diff: 'med', imgKeyword: 'ancient wonder monument' },
-    { q: 'في أي مدينة يقع متحف المتروبوليتان للفنون؟', a: 'نيويورك', diff: 'med', imgKeyword: 'museum interior art' },
-    { q: 'في أي مدينة يقع المتحف البريطاني؟', a: 'لندن', diff: 'med', imgKeyword: 'museum interior art' },
-    { q: 'في أي مدينة يقع متحف أورسيه الشهير باللوحات الانطباعية؟', a: 'باريس', diff: 'med', imgKeyword: 'oil painting art gallery' },
-    { q: 'أين يوجد تمثال داوود الشهير لمايكل آنجلو؟', a: 'فلورنسا، إيطاليا', diff: 'med', imgKeyword: 'marble sculpture statue' },
-    { q: 'من هما مخترعا السينما اللذان عرضا أول فيلم في باريس؟', a: 'الأخوان أوغست ولويس لوميير', diff: 'med', imgKeyword: 'vintage cinema film reel' },
-    { q: 'من هو النحات الفرنسي الشهير بتمثال المفكر The Thinker؟', a: 'أوغست رودان', diff: 'med', imgKeyword: 'marble sculpture statue' },
-    { q: 'من هو أماديوس موزارت؟', a: 'مؤلف موسيقي نمساوي من أشهر المبدعين في تاريخ الموسيقى', diff: 'hard', imgKeyword: 'classic art culture' },
-    { q: 'ما هي أقدم المسرحيات المعروفة في العالم؟', a: 'مسرحية انتصار حورس عند الفراعنة', diff: 'hard', imgKeyword: 'theater stage curtain' },
-    { q: 'من هما الأخوان المشهوران في صناعة السينما الأولى؟', a: 'الأخوان لوميير', diff: 'hard', imgKeyword: 'vintage cinema film reel' },
-    { q: 'من هو الفنان صاحب فيلم الطفل من رواد السينما الصامتة؟', a: 'تشارلي شابلن', diff: 'hard', imgKeyword: 'vintage cinema film reel' },
-    { q: 'من صاحب لوحة الفتاة ذات القرط اللؤلؤي؟', a: 'يوهانس فيرمير', diff: 'hard', imgKeyword: 'oil painting art gallery' },
-    { q: 'ما هو المتحف الأكبر للفن المعاصر في باريس؟', a: 'مركز جورج بومبيدو', diff: 'hard', imgKeyword: 'museum interior art' },
-    { q: 'ما هي الألوان التي لا يميزها المصاب بعمى الألوان الأكثر شيوعاً؟', a: 'الأحمر والأخضر', diff: 'hard', imgKeyword: 'classic art culture' },
-    { q: 'من أنشأ برج لندن؟', a: 'الملك وليم الأول (وليم الفاتح)', diff: 'hard', imgKeyword: 'london historic castle' },
-    { q: 'في أي مدينة إيطالية توجد لوحة العشاء الأخير؟', a: 'ميلانو', diff: 'hard', imgKeyword: 'oil painting art gallery' },
-    { q: 'من هو رسام لوحة دورية الليلة؟', a: 'رامبرانت فان راين', diff: 'hard', imgKeyword: 'oil painting art gallery' },
-    { q: 'في أي متحف تُعرض لوحة دورية الليلة؟', a: 'متحف ريجكس في أمستردام', diff: 'hard', imgKeyword: 'oil painting art gallery' },
-    { q: 'في أي عام سُرقت لوحة الموناليزا مما زاد شهرتها عالمياً؟', a: '1911', diff: 'hard', imgKeyword: 'renaissance painting museum' },
-    { q: 'ما هي الألوان المستخدمة في لوحة غيرنيكا لبيكاسو؟', a: 'الأبيض والأسود والرمادي فقط', diff: 'hard', imgKeyword: 'oil painting art gallery' },
-    { q: 'هل الزخرفة الإسلامية تعتمد على تصوير الإنسان والطبيعة أم على الأشكال الهندسية؟', a: 'الأشكال الهندسية', diff: 'hard', imgKeyword: 'islamic geometric pattern art' },
-    { q: 'ما هو العنصر المعماري التقليدي الذي يوفر الخصوصية والتهوية في العمارة الإسلامية؟', a: 'المشربية', diff: 'hard', imgKeyword: 'islamic geometric pattern art' },
-    { q: 'في أي قرن ظهرت المدرسة الانطباعية في الفن؟', a: 'القرن التاسع عشر', diff: 'hard', imgKeyword: 'oil painting art gallery' },
-    { q: 'ما اسم الحركة الفنية التي رفض فيها الرسامون التركيز على اللحظات العفوية لمشاهد الحياة اليومية بعد الانطباعية؟', a: 'ما بعد الانطباعية', diff: 'hard', imgKeyword: 'oil painting art gallery' },
-    { q: 'كم عدد عجائب الدنيا السبع القديمة التي ما زالت موجودة حتى اليوم؟', a: 'واحدة فقط (هرم خوفو)', diff: 'hard', imgKeyword: 'ancient wonder monument' },
-    { q: 'أين تقع الحدائق المعلقة، إحدى عجائب الدنيا السبع القديمة؟', a: 'بابل، العراق', diff: 'hard', imgKeyword: 'ancient wonder monument' },
-    { q: 'في أي دولة يقع معلم ماتشو بيتشو من عجائب الدنيا السبع الجديدة؟', a: 'بيرو', diff: 'hard', imgKeyword: 'ancient wonder monument' },
-    { q: 'في أي دولة يقع هرم تشيتشن إيتزا من عجائب الدنيا السبع الجديدة؟', a: 'المكسيك', diff: 'hard', imgKeyword: 'ancient wonder monument' },
-    { q: 'ما هو المعلم الإيطالي الذي يُعد من عجائب الدنيا السبع الجديدة ويقع في روما؟', a: 'الكولوسيوم', diff: 'hard', imgKeyword: 'ancient wonder monument' },
-    { q: 'من هو الفرعون الذي غيّر تقاليد النحت المصري القديم وأظهر نفسه وأسرته بواقعية مع عيوبهم الجسدية؟', a: 'أخناتون', diff: 'hard', imgKeyword: 'marble sculpture statue' },
-    { q: 'ما هي المادة التي كانت تُستخدم غالباً في نحت التماثيل المصرية الضخمة؟', a: 'الجرانيت', diff: 'hard', imgKeyword: 'classic art culture' },
-    { q: 'من أسس متاحف الفاتيكان؟', a: 'البابا يوليوس الثاني', diff: 'hard', imgKeyword: 'renaissance chapel ceiling' },
-    { q: 'كان مبنى متحف اللوفر قصراً لمن قبل تحوله إلى متحف؟', a: 'ملوك فرنسا', diff: 'hard', imgKeyword: 'museum interior art' },
-    { q: 'من هو الفنان الأمريكي قائد حركة البوب آرت المشهور برسوماته لصور المشاهير؟', a: 'آندي وارهول', diff: 'hard', imgKeyword: 'classic art culture' },
-    { q: 'من هو الفنان المصري الذي يعد من رواد الفن التشكيلي الحديث في مصر ومسمى باسمه متحف بالإسكندرية؟', a: 'محمود سعيد', diff: 'hard', imgKeyword: 'museum interior art' },
-    { q: 'من هو الرسام الإيطالي الذي رسم سقف كنيسة سيستينا بتكليف من البابا يوليوس الثاني؟', a: 'مايكل آنجلو', diff: 'hard', imgKeyword: 'oil painting art gallery' },
-    { q: 'من هو الفنان الإيطالي المعروف بلوحاته استشهاد القديس استيفان وإنكار بطرس للمسيح؟', a: 'رافائيل', diff: 'hard', imgKeyword: 'classic art culture' },
-    { q: 'في أي عام عُرض أول فيلم سينمائي صامت في التاريخ؟', a: '1895', diff: 'hard', imgKeyword: 'vintage cinema film reel' },
-    { q: 'في أي عام قدمت هوليوود أول فيلم ناطق واسمه مغني الجاز؟', a: '1927', diff: 'hard', imgKeyword: 'vintage cinema film reel' },
-    { q: 'من هو المخرج الفرنسي الملقب بأبي الفيلم الروائي؟', a: 'جورج ميلييس', diff: 'hard', imgKeyword: 'vintage cinema film reel' },
-    { q: 'كم عدد الزوار السنويين تقريباً للوحة الموناليزا في متحف اللوفر؟', a: '6 ملايين زائر', diff: 'vhard', imgKeyword: 'renaissance painting museum' },
-    { q: 'في أي عام بدأ دافنشي رسم لوحة الموناليزا؟', a: '1503', diff: 'vhard', imgKeyword: 'renaissance painting museum' },
-    { q: 'في أي عام أُعلنت دار أوبرا سيدني كأحد مواقع التراث العالمي لليونسكو؟', a: '2007', diff: 'vhard', imgKeyword: 'modern architecture landmark' },
-    { q: 'من هو الكاتب المسرحي البريطاني الذي صمم نافذة زجاجية ملونة عام 1910؟', a: 'جورج برنارد شو', diff: 'vhard', imgKeyword: 'theater stage curtain' },
-    { q: 'في عهد أي خليفتين بدأ ظهور فن الزخرفة الإسلامية؟', a: 'عمر بن الخطاب وعثمان بن عفان', diff: 'vhard', imgKeyword: 'islamic geometric pattern art' },
-    { q: 'ما هي المادة الأساسية التي تعتمد عليها الفنون التطبيقية الإسلامية في صناعة الأواني؟', a: 'الخزف', diff: 'vhard', imgKeyword: 'classic art culture' },
-    { q: 'ما اسم الحركة الفنية التي أسسها بيكاسو وجورج براك وتعتمد على تفكيك الأشكال لزوايا هندسية متعددة؟', a: 'التكعيبية', diff: 'vhard', imgKeyword: 'oil painting art gallery' },
-    { q: 'من هم أشهر فناني المدرسة الانطباعية إلى جانب مونيه؟', a: 'سيزلي وبيسارو وديجا', diff: 'vhard', imgKeyword: 'oil painting art gallery' },
-    { q: 'في أي عام تقريباً بُنيت أهرامات الجيزة المصرية؟', a: 'حوالي 2560 قبل الميلاد', diff: 'vhard', imgKeyword: 'egyptian pyramid ancient' },
-    { q: 'ما اسم العاصمة الجديدة التي أسسها أخناتون بعد تركه طيبة؟', a: 'أخت أتون (تل العمارنة)', diff: 'vhard', imgKeyword: 'classic art culture' },
-    { q: 'ما هو الرمز الفرعوني المرسوم بالهيروغليفية الذي يحمل اسم الملك؟', a: 'الخرطوش الفرعوني', diff: 'vhard', imgKeyword: 'egyptian pyramid ancient' },
-    { q: 'كم اسماً يمتلك الفرعون المصري القديم عادة؟', a: 'خمسة أسماء', diff: 'vhard', imgKeyword: 'egyptian pyramid ancient' },
-    { q: 'في أي عصر ارتقى الرسم الملون في مصر القديمة إلى فن مستقل بتأثير يوناني؟', a: 'عهد البطالمة', diff: 'vhard', imgKeyword: 'oil painting art gallery' },
-    { q: 'ما هو أكبر مجمع متاحف في العالم؟', a: 'معهد سميثسونيان', diff: 'vhard', imgKeyword: 'classic art culture' },
-    { q: 'كم عدد المتاحف والمعارض التي يضمها معهد سميثسونيان؟', a: '19 متحفاً ومعرضاً', diff: 'vhard', imgKeyword: 'classic art culture' },
-    { q: 'من صمم مدخل الهرم الزجاجي الشهير في متحف اللوفر عام 1989؟', a: 'المعماري ليوه مينغ بي', diff: 'vhard', imgKeyword: 'museum interior art' },
-    { q: 'من هو النحات العراقي الملقب بشيخ النحاتين في الشرق الأوسط؟', a: 'محمد غني حكمت', diff: 'vhard', imgKeyword: 'marble sculpture statue' },
-    { q: 'من هو رسام لوحة الغجرية النائمة بأسلوبه البدائي المميز؟', a: 'هنري روسو', diff: 'vhard', imgKeyword: 'oil painting art gallery' },
-    { q: 'كم بلغ سعر بيع لوحة الموناليزا تقديرياً عام 2015 مما يجعلها أغلى لوحة فنية في العالم؟', a: 'حوالي 782 مليون دولار', diff: 'vhard', imgKeyword: 'renaissance painting museum' },
-    { q: 'من هو رسام لوحة "آكلو البطاطا" بجانب لوحاته الأخرى؟', a: 'فنسنت فان كوخ', diff: 'vhard', imgKeyword: 'oil painting art gallery' },
-    { q: 'كم كان عمر فان كوخ عندما توفي؟', a: '37 سنة', diff: 'vhard', imgKeyword: 'classic art culture' },
-    { q: 'ما هي الاختراعات الثلاثة التي اعتمد عليها الأخوان لوميير في اختراع السينما؟', a: 'اللعبة البصرية والفانوس السحري والتصوير الفوتوغرافي', diff: 'vhard', imgKeyword: 'vintage cinema film reel' },
-    { q: 'ما هو أول فيلم رومانسي في تاريخ السينما وأنتجته شركة إديسون عام 1896؟', a: 'فيلم القبلة', diff: 'vhard', imgKeyword: 'vintage cinema film reel' },
-    { q: 'كم استغرق مشهد القبلة الأول في تاريخ السينما؟', a: '25 ثانية', diff: 'vhard', imgKeyword: 'vintage cinema film reel' },
-    { q: 'من هو المخرج الأمريكي الذي أعطى السينما شخصية مستقلة عام 1903؟', a: 'إدوين بورتر', diff: 'vhard', imgKeyword: 'vintage cinema film reel' },
-    { q: 'ما هو أول فيلم جريمة في تاريخ السينما؟', a: 'تاريخ جريمة (للمخرج فرديناند زيكا)', diff: 'vhard', imgKeyword: 'vintage cinema film reel' },
-    { q: 'من هو الرسام الهولندي الذي رسم لوحة الفتاة ذات القرط اللؤلؤي وأطلق عليها لقب موناليزا الشمال؟', a: 'يوهانس فيرمير', diff: 'vhard', imgKeyword: 'renaissance painting museum' },
-    { q: 'ما اسم الكنيسة الشهيرة غير المكتملة التي صممها أنطونيو غاودي في برشلونة؟', a: 'ساغرادا فاميليا (العائلة المقدسة)', diff: 'vhard', imgKeyword: 'renaissance chapel ceiling' },
-    { q: 'من هو الرسام الفلمنكي الذي يُنسب له اختراع الرسم بالألوان الزيتية؟', a: 'يان فان آيك', diff: 'vhard', imgKeyword: 'oil painting art gallery' },
-    { q: 'ما هو نوع الفن الذي يعتمد على تشكيل قطع صغيرة ملونة لتكوين صورة كبيرة؟', a: 'فن الفسيفساء (الموزاييك)', diff: 'vhard', imgKeyword: 'classic art culture' },
-    { q: 'ما هو الاسم الذي يُطلق على فن تزيين المخطوطات بالرسومات الصغيرة الملونة في التراث الإسلامي؟', a: 'فن المنمنمات', diff: 'vhard', imgKeyword: 'classic art culture' },
-    { q: 'ما هو اسم متحف الفن الحديث الشهير في نيويورك المعروف اختصاراً بـ MoMA؟', a: 'متحف الفن الحديث', diff: 'vhard', imgKeyword: 'museum interior art' },
-    { q: 'ما هو الطراز المعماري الذي ازدهر في أوروبا خلال القرون الوسطى واشتهر بالأقواس المدببة والنوافذ الزجاجية الملونة؟', a: 'الطراز القوطي', diff: 'vhard', imgKeyword: 'gothic architecture cathedral' },
-    { q: 'في أي مصحة نفسية رسم فان جوخ لوحة ليلة النجوم؟', a: 'سان ريمي (سان بول دو موسول) في فرنسا', diff: 'vhard', imgKeyword: 'oil painting art gallery' },
   ],
   riddle: [
     { q: 'ما هو الشيء الذي يمتلك عيناً واحدة لكنه لا يرى؟', a: 'الإبرة', diff: 'med', imgKeyword: 'puzzle riddle brain teaser' },
@@ -2852,6 +2748,14 @@ function openQuestion(catId, tileIdx) {
         const img = new Image();
         img.alt = '';
         img.onload = () => {
+          // Guard against a "loaded" image that's actually broken/empty (0×0 natural size) —
+          // this happens with some failed/placeholder responses and previously caused a solid
+          // black box instead of a real error message, since all the crop math below would
+          // silently compute to zero/garbage values.
+          if (!img.naturalWidth || !img.naturalHeight) {
+            zoomDiv.innerHTML = `<div class="q-pic-genfail">📷<br>تعذّر تحميل الصورة</div>`;
+            return;
+          }
           zoomDiv.innerHTML = '';
           // Reliable pixel-based crop: first make the image fill/cover the 220x220 box exactly
           // (like object-fit:cover would, computed manually), THEN apply extra zoom on top of
@@ -3014,34 +2918,50 @@ function stopTimer() {
 // separate from and unaffected by revealing the text answer — the crop never auto-expands.
 // Panning/zooming stays bounded within the source image's real pixels (never shows blank space
 // beyond the photo's edges), but does NOT limit how far into the photo the player can zoom.
+// Enables manual pinch-to-zoom and drag-to-pan STRICTLY within the already-cropped 220x220
+// view — the player can zoom in further to inspect detail, and pan around, but can never reveal
+// any part of the source photo that wasn't already visible in the original crop. This works by
+// scaling/panning relative to the crop's own current position (baseOffsetX/Y), clamping so the
+// visible window never moves past the edges of that original 220x220 crop rectangle.
 function setupZoomPanZoom(container, img, baseW, baseH, baseOffsetX, baseOffsetY, boxSize) {
   let scale = 1;
-  let panX = -baseOffsetX;
-  let panY = -baseOffsetY;
+  // panX/panY are offsets ADDED on top of the original crop position (baseOffsetX/Y stays fixed
+  // as the "anchor" — we never move outside the rectangle that was originally visible).
+  let panX = 0;
+  let panY = 0;
   let startDistance = 0;
   let startScale = 1;
   let startPanX = 0, startPanY = 0;
   let lastTouchX = 0, lastTouchY = 0;
   let isPanning = false;
 
-  const MAX_SCALE = 4; // allow zooming in up to 4x beyond the initial crop for close inspection
-  const MIN_SCALE = 1; // never zoom out past the original crop level
+  const MAX_SCALE = 3; // zoom in up to 3x further into the SAME crop, for close inspection
+  const MIN_SCALE = 1; // never zoom out past the original crop
 
-  function clampPan() {
-    const curW = baseW * scale;
-    const curH = baseH * scale;
-    const minX = boxSize - curW; // most negative allowed (right/bottom edge of image)
-    const minY = boxSize - curH;
-    panX = Math.min(0, Math.max(minX, panX));
-    panY = Math.min(0, Math.max(minY, panY));
+  function clampPanAndScale() {
+    // At the current scale, the crop window (boxSize x boxSize) shows a boxSize/scale-sized
+    // slice of the ORIGINAL crop rectangle. The maximum pan in either direction is however much
+    // extra room that leaves within the original boxSize crop — this guarantees we never show
+    // pixels outside what was in the original 220x220 crop, regardless of zoom level.
+    const visibleSlice = boxSize / scale;
+    const maxPan = (boxSize - visibleSlice) / 2 * scale;
+    panX = Math.min(maxPan, Math.max(-maxPan, panX));
+    panY = Math.min(maxPan, Math.max(-maxPan, panY));
   }
 
   function applyTransform() {
-    clampPan();
-    img.style.width = (baseW * scale) + 'px';
-    img.style.height = (baseH * scale) + 'px';
-    img.style.left = panX + 'px';
-    img.style.top = panY + 'px';
+    clampPanAndScale();
+    const curW = baseW * scale;
+    const curH = baseH * scale;
+    img.style.width = curW + 'px';
+    img.style.height = curH + 'px';
+    // Keep the ORIGINAL crop's center point anchored at the viewport's center as we scale,
+    // so zooming digs into the same crop rather than drifting toward the source image's
+    // corner. panX/panY (already clamped to stay within the original crop) are added on top.
+    const origCenterX = baseOffsetX + boxSize / 2;
+    const origCenterY = baseOffsetY + boxSize / 2;
+    img.style.left = (boxSize / 2 - origCenterX * scale + panX) + 'px';
+    img.style.top = (boxSize / 2 - origCenterY * scale + panY) + 'px';
   }
 
   function getDistance(touches) {
@@ -3084,13 +3004,14 @@ function setupZoomPanZoom(container, img, baseW, baseH, baseOffsetX, baseOffsetY
     isPanning = false;
   });
 
-  // Double-tap to quickly toggle between the base crop and a closer 2.5x zoom, for users
-  // who don't want to pinch manually.
+  // Double-tap to quickly toggle between the base crop and a closer 2x zoom (still within
+  // the same original crop bounds), for users who don't want to pinch manually.
   let lastTapTime = 0;
   container.addEventListener('touchend', (e) => {
     const now = Date.now();
     if (now - lastTapTime < 300) {
       scale = scale > 1.2 ? 1 : 2.5;
+      if (scale === 1) { panX = 0; panY = 0; }
       applyTransform();
     }
     lastTapTime = now;
