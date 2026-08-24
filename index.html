@@ -264,7 +264,7 @@ h1, h2, h3 { font-family: 'Cairo', 'Tajawal', sans-serif; font-weight: 800; }
 .q-pic-hint svg { width: 100%; height: 100%; display: block; padding: 20px; box-sizing: border-box; }
 .q-pic-loading { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
 .q-pic-loading .spinner { width: 32px; height: 32px; border: 3px solid rgba(212,175,55,0.25); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
-.q-zoom-hint { width: 220px; height: 220px; margin: 0 auto; border-radius: 14px; overflow: hidden; background: rgba(255,255,255,0.04); border: 2px solid rgba(6,182,212,0.4); position: relative; }
+.q-zoom-hint { width: 220px; height: 220px; margin: 0 auto; border-radius: 14px; overflow: hidden; background: rgba(255,255,255,0.04); border: 2px solid rgba(6,182,212,0.4); position: relative; touch-action: none; }
 .q-zoom-hint img { position: absolute; display: block; max-width: none; }
 .q-zoom-hint.revealed img { position: static !important; width: 100% !important; height: 100% !important; object-fit: cover; max-width: none; }
 .q-zoom-badge { position: absolute; bottom: 6px; right: 6px; background: rgba(6,182,212,0.85); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; font-family: 'Cairo', sans-serif; }
@@ -2890,8 +2890,13 @@ function openQuestion(catId, tileIdx) {
           zoomDiv.dataset.fullUrl = url;
           const badge = document.createElement('div');
           badge.className = 'q-zoom-badge';
-          badge.textContent = '🔍 مقرّبة';
+          badge.textContent = '🔍 مقرّبة — كبّرها بأصابعك';
           zoomDiv.appendChild(badge);
+          // Let the player pinch-zoom and drag-pan the CROPPED image itself to inspect it more
+          // closely — this never reveals the full uncropped photo, it just lets them look harder
+          // at the same crop (exactly what was requested: zoom is a manual inspection tool, fully
+          // independent from the reveal-answer button).
+          setupZoomPanZoom(zoomDiv, img, renderedW, renderedH, offsetX, offsetY, boxSize);
         };
         img.onerror = () => { zoomDiv.innerHTML = `<div class="q-pic-genfail">📷<br>تعذّر تحميل الصورة</div>`; };
         img.src = url;
@@ -3004,6 +3009,94 @@ function stopTimer() {
 }
 
 /* ===================== REVEAL / JUDGE ===================== */
+// Enables manual pinch-to-zoom and drag-to-pan on the already-cropped zoom-category photo,
+// so the player can inspect it more closely with their own fingers. This is intentionally
+// separate from and unaffected by revealing the text answer — the crop never auto-expands.
+// Panning/zooming stays bounded within the source image's real pixels (never shows blank space
+// beyond the photo's edges), but does NOT limit how far into the photo the player can zoom.
+function setupZoomPanZoom(container, img, baseW, baseH, baseOffsetX, baseOffsetY, boxSize) {
+  let scale = 1;
+  let panX = -baseOffsetX;
+  let panY = -baseOffsetY;
+  let startDistance = 0;
+  let startScale = 1;
+  let startPanX = 0, startPanY = 0;
+  let lastTouchX = 0, lastTouchY = 0;
+  let isPanning = false;
+
+  const MAX_SCALE = 4; // allow zooming in up to 4x beyond the initial crop for close inspection
+  const MIN_SCALE = 1; // never zoom out past the original crop level
+
+  function clampPan() {
+    const curW = baseW * scale;
+    const curH = baseH * scale;
+    const minX = boxSize - curW; // most negative allowed (right/bottom edge of image)
+    const minY = boxSize - curH;
+    panX = Math.min(0, Math.max(minX, panX));
+    panY = Math.min(0, Math.max(minY, panY));
+  }
+
+  function applyTransform() {
+    clampPan();
+    img.style.width = (baseW * scale) + 'px';
+    img.style.height = (baseH * scale) + 'px';
+    img.style.left = panX + 'px';
+    img.style.top = panY + 'px';
+  }
+
+  function getDistance(touches) {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  container.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 2) {
+      startDistance = getDistance(e.touches);
+      startScale = scale;
+      e.preventDefault();
+    } else if (e.touches.length === 1) {
+      isPanning = true;
+      lastTouchX = e.touches[0].clientX;
+      lastTouchY = e.touches[0].clientY;
+      startPanX = panX;
+      startPanY = panY;
+    }
+  }, { passive: false });
+
+  container.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 2) {
+      const newDistance = getDistance(e.touches);
+      scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, startScale * (newDistance / startDistance)));
+      applyTransform();
+      e.preventDefault();
+    } else if (e.touches.length === 1 && isPanning) {
+      const dx = e.touches[0].clientX - lastTouchX;
+      const dy = e.touches[0].clientY - lastTouchY;
+      panX = startPanX + dx;
+      panY = startPanY + dy;
+      applyTransform();
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  container.addEventListener('touchend', () => {
+    isPanning = false;
+  });
+
+  // Double-tap to quickly toggle between the base crop and a closer 2.5x zoom, for users
+  // who don't want to pinch manually.
+  let lastTapTime = 0;
+  container.addEventListener('touchend', (e) => {
+    const now = Date.now();
+    if (now - lastTapTime < 300) {
+      scale = scale > 1.2 ? 1 : 2.5;
+      applyTransform();
+    }
+    lastTapTime = now;
+  });
+}
+
 function revealAnswer() {
   if (gameState.revealed) return;
   gameState.revealed = true;
@@ -3014,22 +3107,9 @@ function revealAnswer() {
   if (gameState.stealMode) {
     document.getElementById('team-pick-row').classList.add('show');
   }
-  // Zoom category: un-crop the image to show it in full once the answer is revealed.
-  const zoomContainer = document.getElementById('zoom-hint-container');
-  if (zoomContainer && zoomContainer.dataset.fullUrl) {
-    zoomContainer.classList.add('revealed');
-    const img = zoomContainer.querySelector('img');
-    if (img) {
-      img.style.width = '';
-      img.style.height = '';
-      img.style.left = '';
-      img.style.top = '';
-      img.style.position = '';
-      img.style.maxWidth = '';
-    }
-    const badge = zoomContainer.querySelector('.q-zoom-badge');
-    if (badge) badge.textContent = '✅ الصورة كاملة';
-  }
+  // Zoom category: the cropped photo intentionally stays as-is when the answer is revealed —
+  // zooming/inspecting the image and revealing the text answer are two separate, independent
+  // actions (the player pinch-zooms into the photo itself via touch, see setupZoomPanZoom()).
 }
 
 function judgeAnswer(isCorrect) {
