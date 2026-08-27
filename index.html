@@ -2884,7 +2884,7 @@ function openQuestion(catId, tileIdx) {
           for (let i = 0; i < questionId.length; i++) seed = (seed * 31 + questionId.charCodeAt(i)) >>> 0;
           // Slightly gentler zoom range so more real detail stays visible (was 3.5x-5.0x, now 2.6x-3.6x),
           // reducing the chance of landing on a flat/empty region even near the center.
-          const extraZoom = 2.6 + (seed % 100) / 100;
+          const extraZoom = 4 + (seed % 150) / 100; // 4.0x - 5.5x — zoomed in much closer for a harder guess
           const totalScale = coverScale * extraZoom;
           const renderedW = natW * totalScale;
           const renderedH = natH * totalScale;
