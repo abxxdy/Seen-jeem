@@ -3225,21 +3225,30 @@ function revealAnswer() {
     document.getElementById('team-pick-row').classList.add('show');
   }
   // Zoom category: show the FULL uncropped photo once the answer is revealed, so the player
-  // can see exactly what the cropped detail was showing all along.
+  // can see exactly what the cropped detail was showing all along. Read directly from the
+  // <img> element's own src/complete state (rather than only a custom dataset flag) so this
+  // works reliably even if the flag assignment timing was ever affected by DOM/paint quirks.
   const zoomContainer = document.getElementById('zoom-hint-container');
-  if (zoomContainer && zoomContainer.dataset.fullUrl) {
-    zoomContainer.classList.add('revealed');
+  if (zoomContainer) {
     const img = zoomContainer.querySelector('img');
-    if (img) {
-      img.style.width = '';
-      img.style.height = '';
-      img.style.left = '';
-      img.style.top = '';
-      img.style.position = '';
-      img.style.maxWidth = '';
+    const revealImg = (targetImg) => {
+      zoomContainer.classList.add('revealed');
+      targetImg.style.width = '';
+      targetImg.style.height = '';
+      targetImg.style.left = '';
+      targetImg.style.top = '';
+      targetImg.style.position = '';
+      targetImg.style.maxWidth = '';
+      const badge = zoomContainer.querySelector('.q-zoom-badge');
+      if (badge) badge.textContent = '✅ الصورة كاملة';
+    };
+    if (img && img.src && img.complete && img.naturalWidth > 0) {
+      revealImg(img);
+    } else if (img && img.src) {
+      // Image hasn't finished loading yet (player answered very fast) — reveal automatically
+      // the instant it does load, instead of silently leaving the crop stuck in place forever.
+      img.addEventListener('load', () => revealImg(img), { once: true });
     }
-    const badge = zoomContainer.querySelector('.q-zoom-badge');
-    if (badge) badge.textContent = '✅ الصورة كاملة';
   }
 }
 
