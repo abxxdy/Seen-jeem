@@ -2880,20 +2880,22 @@ function openQuestion(catId, tileIdx) {
           const coverScale = Math.max(boxSize / natW, boxSize / natH);
           let seed = 0;
           for (let i = 0; i < questionId.length; i++) seed = (seed * 31 + questionId.charCodeAt(i)) >>> 0;
-          // Slightly gentler zoom range so more real detail stays visible (was 3.5x-5.0x, now 2.6x-3.6x),
-          // reducing the chance of landing on a flat/empty region even near the center.
-          const extraZoom = 4 + (seed % 150) / 100; // 4.0x - 5.5x — zoomed in much closer for a harder guess
+          // Zoomed in harder (was 4.0x-5.5x, now 5.5x-7.5x) — simple single-colored/shaped objects
+          // like an apple or a watch face were still fully recognizable at the old zoom level even
+          // when centered, since their whole silhouette fit in the crop. A tighter zoom means only
+          // a small texture/color patch is visible, not the object's overall recognizable shape.
+          const extraZoom = 5.5 + (seed % 200) / 100; // 5.5x - 7.5x
           const totalScale = coverScale * extraZoom;
           const renderedW = natW * totalScale;
           const renderedH = natH * totalScale;
           const maxOffsetX = Math.max(0, renderedW - boxSize);
           const maxOffsetY = Math.max(0, renderedH - boxSize);
-          // Crop from near the image's CENTER instead of a fully random position — stock photos
-          // almost always frame their main subject in the middle, so centering (with only a small
-          // ±12% jitter for variety) reliably lands on the actual object instead of risking an
-          // empty background or featureless edge like a blank page corner.
-          const jitterX = ((seed % 1000) / 1000 - 0.5) * 0.24; // -12% to +12%
-          const jitterY = (((seed >> 4) % 1000) / 1000 - 0.5) * 0.24;
+          // Wider jitter around center (was ±12%, now ±22%) so crops land on more varied parts of
+          // the object — including its edges/texture rather than always the same dead-center view
+          // that happened to show the whole shape clearly — while still avoiding the photo's blank
+          // outer background.
+          const jitterX = ((seed % 1000) / 1000 - 0.5) * 0.44; // -22% to +22%
+          const jitterY = (((seed >> 4) % 1000) / 1000 - 0.5) * 0.44;
           const offsetX = maxOffsetX * (0.5 + jitterX);
           const offsetY = maxOffsetY * (0.5 + jitterY);
           img.style.position = 'absolute';
